@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <h1>{{ count }}</h1>
+    <button @click="onClick">Click me!</button>
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
   </div>
@@ -8,13 +10,22 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "./components/HelloWorld.vue";
+import store from "./store/index";
 
 @Component({
   components: {
     HelloWorld
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  get count() {
+    return `${store.state.count}`;
+  }
+
+  onClick() {
+    store.commit("increment");
+  }
+}
 </script>
 
 <style lang="scss">
